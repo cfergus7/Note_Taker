@@ -37,11 +37,10 @@ app.post("/api/notes", (req, res) => {
         req.body.id = notesData.length;
         notesData.push(req.body);
         notesData = JSON.stringify(notesData);
-        fs.writeFile("./db/db.json", notesData, "utf8", function (err) {
+        fs.writeFile("./Develop/db/db.json", notesData, "utf8", function (err) {
             if (err) throw err;
         });
         res.json(JSON.parse(notesData));
-
     } catch (err) {
         throw err;
         console.error(err);
@@ -77,13 +76,6 @@ app.get("*", (req, res) => {
 app.get("/api/notes", (req, res) => {
     return res.sendFile(path.json(__dirname, "./Develop/db/db.json"));
 });
-app.get("/notes", (req, res) => {
-    res.sendFile(path.join(__dirname, "./Develop/public/notes.html"));
-});
-app.get("*", (req, res) => {
-    res.sendFile(path.join(__dirname, "./Develop /public/index.html"));
-});
-
 // Starts the server to begin listening
 // =============================================================
 app.listen(PORT, function () {
